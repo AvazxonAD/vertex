@@ -1,0 +1,105 @@
+paths:
+  /fields:
+    get:
+      summary: Get all fields
+      tags: [Fields]
+      parameters:
+        - name: jurnal_id
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of fields retrieved successfully
+
+    post:
+      summary: Create new field
+      tags: [Fields]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Physics"
+                jurnal_id:
+                  type: integer
+                  example: 1
+              required:
+                - name
+                - jurnal_id
+      responses:
+        "201":
+          description: Field created successfully
+
+  /fields/{id}:
+    get:
+      summary: Get field by ID
+      tags: [Fields]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Field details retrieved successfully
+        "404":
+          description: Field not found
+
+    put:
+      summary: Update field by ID
+      tags: [Fields]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Quantum Physics"
+                jurnal_id:
+                  type: integer
+                  example: 2
+              required:
+                - name
+                - jurnal_id
+      responses:
+        "200":
+          description: Field updated successfully
+        "404":
+          description: Field not found
+
+    delete:
+      summary: Delete field by ID
+      tags: [Fields]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Field deleted successfully
+        "404":
+          description: Field not found

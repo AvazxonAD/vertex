@@ -1,0 +1,91 @@
+paths:
+  /jurnals:
+    get:
+      summary: Get all jurnals
+      tags: [Jurnals]
+      responses:
+        "200":
+          description: List of jurnals retrieved successfully
+
+    post:
+      summary: Create new jurnal
+      tags: [Jurnals]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Scientific Journal 2024"
+              required:
+                - name
+      responses:
+        "201":
+          description: Jurnal created successfully
+
+  /jurnals/{id}:
+    get:
+      summary: Get jurnal by ID
+      tags: [Jurnals]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Jurnal details retrieved successfully
+        "404":
+          description: Jurnal not found
+
+    put:
+      summary: Update jurnal by ID
+      tags: [Jurnals]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated Journal Name"
+              required:
+                - name
+      responses:
+        "200":
+          description: Jurnal updated successfully
+        "404":
+          description: Jurnal not found
+
+    delete:
+      summary: Delete jurnal by ID
+      tags: [Jurnals]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Jurnal deleted successfully
+        "404":
+          description: Jurnal not found

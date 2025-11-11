@@ -1,0 +1,1 @@
+insert into users(email, password, username) values('super-admin@gmail.com', '$2b$10$IV9uw9NrQFtqLXsmL6iSUOOL2maq6YGwMXyIcFpxM3I2Xfa.XtAty', 'super-admin');
