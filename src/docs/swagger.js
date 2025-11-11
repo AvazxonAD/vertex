@@ -12,7 +12,7 @@ function loadModuleSwagger() {
       title: "Mobile API",
       version: "1.0.0",
     },
-    servers: [{ url: "http://localhost:3002/api" }, { url: "http://localhost:3002/api" }, { url: "http://217.18.63.71:3002/api" }],
+    servers: [{ url: "http://localhost:4001/api" }, { url: "http://217.18.63.71:4001/api" }],
     paths: {},
     components: {
       securitySchemes: {

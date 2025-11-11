@@ -1,0 +1,128 @@
+paths:
+  /articles:
+    get:
+      summary: Get all articles
+      tags: [Articles]
+      parameters:
+        - name: field_id
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of articles retrieved successfully
+
+    post:
+      summary: Create article
+      tags: [Articles]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Modern Physics"
+                field_id:
+                  type: integer
+                  example: 2
+                issn:
+                  type: string
+                  example: "1234-5678"
+                color:
+                  type: string
+                  example: "#FF0000"
+                image:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - issn
+                - color
+                - image
+                - field_id
+      responses:
+        "201":
+          description: articles created successfully
+
+  /articles/{id}:
+    get:
+      summary: Get article by ID
+      tags: [Articles]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: articles details retrieved successfully
+        "404":
+          description: articles not found
+
+    put:
+      summary: Update article by ID
+      tags: [Articles]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Modern Physics"
+                field_id:
+                  type: integer
+                  example: 2
+                issn:
+                  type: string
+                  example: "1234-5678"
+                color:
+                  type: string
+                  example: "#FF0000"
+                image:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - issn
+                - color
+                - field_id
+      responses:
+        "200":
+          description: articles updated successfully
+        "404":
+          description: articles not found
+
+    delete:
+      summary: Delete article by ID
+      tags: [Articles]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: articles deleted successfully
+        "404":
+          description: articles not found
