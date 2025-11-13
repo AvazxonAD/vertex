@@ -41,6 +41,7 @@ exports.Schema = class {
     return Joi.object({
       query: Joi.object({
         field_id: Joi.number().positive().allow(null, ""),
+        jurnal_id: Joi.number().positive().allow(null, ""),
       }),
     });
   }

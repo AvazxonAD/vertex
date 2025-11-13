@@ -37,19 +37,29 @@ exports.ArticlesDB = class {
 
     if (filter.field_id) {
       params.push(filter.field_id);
-      conditions.push(`field_id = $${params.length}`);
+      conditions.push(`f.id = $${params.length}`);
+    }
+
+    if (filter.jurnal_id) {
+      params.push(filter.jurnal_id);
+      conditions.push(`j.id = $${params.length}`);
     }
 
     const where = conditions.length ? `AND ${conditions.join(" AND ")}` : "";
 
     const query = `--sql
       SELECT
-        *,
-        '${process.env.BASE_URL}/articles/file/' || image AS image_url
-      FROM articles
-      WHERE deleted_at IS NULL
+        a.*,
+        f.name AS field_name,
+        j.name AS jurnal_name,
+        j.id AS jurnal_id,
+        '${process.env.BASE_URL}/articles/file/' || a.image AS image_url
+      FROM articles a
+      JOIN fields f ON f.id = a.field_id
+      JOIN jurnals j ON j.id = f.jurnal_id
+      WHERE a.deleted_at IS NULL
         ${where}
-      ORDER BY created_at DESC`;
+      ORDER BY a.title DESC`;
 
     const result = await db.query(query, params);
 

@@ -1,6 +1,7 @@
 const { ArticlesDB } = require("./db");
 const { ErrorResponse } = require("../../helper/errorResponse");
 const { FieldsService } = require("../field/service");
+const { JurnalsService } = require("../jurnal/service");
 
 exports.ArticlesService = class {
   static now = new Date();
@@ -42,6 +43,10 @@ exports.ArticlesService = class {
   static async get(data) {
     if (data.field_id) {
       await FieldsService.getById({ id: data.field_id });
+    }
+
+    if (data.jurnal_id) {
+      await JurnalsService.getById({ id: data.jurnal_id });
     }
 
     const result = await ArticlesDB.get([], data);
