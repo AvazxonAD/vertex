@@ -13,6 +13,11 @@ exports.ArticlesService = class {
 
     await FieldsService.getById({ id: data.field_id });
 
+    const check = await ArticlesDB.getByName([data.title]);
+    if (check) {
+      throw new ErrorResponse("article.title_already_exists", 409);
+    }
+
     const result = await ArticlesDB.create([data.title, data.issn, data.color, data.file.filename, data.field_id]);
 
     return result;
@@ -24,6 +29,13 @@ exports.ArticlesService = class {
     await FieldsService.getById({ id: data.field_id });
 
     const image = data.file ? data.file.filename : old_data.image;
+
+    if (old_data.title !== data.title) {
+      const check = await ArticlesDB.getByName([data.title]);
+      if (check) {
+        throw new ErrorResponse("article.title_already_exists", 409);
+      }
+    }
 
     const result = await ArticlesDB.update([data.title, data.issn, data.color, image, data.field_id, data.id]);
 

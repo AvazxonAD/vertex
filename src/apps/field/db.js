@@ -43,7 +43,7 @@ exports.FieldsDB = class {
       LEFT JOIN jurnals j ON j.id = f.jurnal_id
       WHERE f.deleted_at IS NULL
         ${where}
-      ORDER BY f.created_at DESC`;
+      ORDER BY f.name`;
 
     const result = await db.query(query, params);
 

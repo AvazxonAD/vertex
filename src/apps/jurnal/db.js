@@ -31,7 +31,7 @@ exports.JurnalsDB = class {
         *
       FROM jurnals
       WHERE deleted_at IS NULL
-      ORDER BY created_at DESC`;
+      ORDER BY name`;
 
     const result = await db.query(query, params);
 

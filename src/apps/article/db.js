@@ -32,6 +32,21 @@ exports.ArticlesDB = class {
     return result[0];
   }
 
+  static async getByName(params) {
+    const query = `--sql
+      SELECT
+        *,
+        '${process.env.BASE_URL}/articles/file/' || image AS image_url
+      FROM articles
+      WHERE title = $1
+        AND deleted_at IS NULL
+    `;
+
+    const result = await db.query(query, params);
+
+    return result[0];
+  }
+
   static async get(params, filter) {
     const conditions = [];
 
@@ -59,7 +74,7 @@ exports.ArticlesDB = class {
       JOIN jurnals j ON j.id = f.jurnal_id
       WHERE a.deleted_at IS NULL
         ${where}
-      ORDER BY a.title DESC`;
+      ORDER BY a.title`;
 
     const result = await db.query(query, params);
 
