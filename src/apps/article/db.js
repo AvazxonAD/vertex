@@ -55,10 +55,10 @@ exports.ArticlesDB = class {
       conditions.push(`f.id = $${params.length}`);
     }
 
-    if (filter.jurnal_id) {
-      params.push(filter.jurnal_id);
-      conditions.push(`j.id = $${params.length}`);
-    }
+    // if (filter.jurnal_id) {
+    //   params.push(filter.jurnal_id);
+    //   conditions.push(`j.id = $${params.length}`);
+    // }
 
     const where = conditions.length ? `AND ${conditions.join(" AND ")}` : "";
 

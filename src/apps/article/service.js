@@ -57,11 +57,18 @@ exports.ArticlesService = class {
       await FieldsService.getById({ id: data.field_id });
     }
 
+    const result = await ArticlesDB.get([], data);
+
     if (data.jurnal_id) {
       await JurnalsService.getById({ id: data.jurnal_id });
+      for (let item of result) {
+        if (item.jurnal_id === data.jurnal_id) {
+          item.active = true;
+        } else {
+          item.active = false;
+        }
+      }
     }
-
-    const result = await ArticlesDB.get([], data);
 
     return result;
   }
