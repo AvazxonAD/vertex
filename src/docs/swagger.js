@@ -5,7 +5,6 @@ const YAML = require("yamljs");
 function loadModuleSwagger() {
   const appsDir = path.join(__dirname, "../apps");
   const modules = fs.readdirSync(appsDir);
-
   const combined = {
     openapi: "3.0.0",
     info: {

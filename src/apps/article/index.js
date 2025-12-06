@@ -2,7 +2,6 @@ const express = require("express");
 const { Controller } = require("./controller");
 const { Schema } = require("./schema");
 const { validator } = require("../../middleware/validator");
-const { protect } = require("../../middleware/auth");
 const { multiUpload } = require("../../middleware/upload");
 
 const router = express.Router();

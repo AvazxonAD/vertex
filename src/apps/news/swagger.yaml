@@ -1,0 +1,144 @@
+paths:
+  /news:
+    get:
+      summary: Get all news
+      tags: [News]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: List of news retrieved successfully
+
+    post:
+      summary: Create news
+      tags: [News]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  example: 2
+                title:
+                  type: string
+                  example: "Breaking News Title"
+                description:
+                  type: string
+                  example: "Short news description"
+                content:
+                  type: string
+                  example: "<p>Full HTML content...</p>"
+                tags:
+                  type: array
+                  example: ["1"]
+                image:
+                  type: string
+                  format: binary
+                video:
+                  type: string
+                  format: binary
+                gif:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - category_id
+                - description
+                - content
+      responses:
+        "201":
+          description: News created successfully
+
+  /news/{id}:
+    get:
+      summary: Get news by ID
+      tags: [News]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: News retrieved successfully
+        "404":
+          description: News not found
+
+    put:
+      summary: Update news by ID
+      tags: [News]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  example: 1
+                title:
+                  type: string
+                description:
+                  type: string
+                content:
+                  type: string
+                tags:
+                  type: array
+                image:
+                  type: string
+                  format: binary
+                video:
+                  type: string
+                  format: binary
+                gif:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: News updated successfully
+        "404":
+          description: News not found
+
+    delete:
+      summary: Delete news by ID
+      tags: [News]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: News deleted successfully
+        "404":
+          description: News not found

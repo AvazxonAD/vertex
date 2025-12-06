@@ -1,0 +1,106 @@
+paths:
+  /news-categories:
+    get:
+      summary: Get all news categories
+      tags: [NewsCategories]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: List of news categories retrieved successfully
+
+    post:
+      summary: Create new news category
+      tags: [NewsCategories]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Politics"
+              required:
+                - name
+      responses:
+        "201":
+          description: News category created successfully
+
+  /news-categories/{id}:
+    get:
+      summary: Get news category by ID
+      tags: [NewsCategories]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: News category retrieved successfully
+        "404":
+          description: News category not found
+
+    put:
+      summary: Update news category by ID
+      tags: [NewsCategories]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated News Category"
+      responses:
+        "200":
+          description: News category updated successfully
+        "404":
+          description: News category not found
+
+    delete:
+      summary: Delete news category by ID
+      tags: [NewsCategories]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: News category deleted successfully
+        "404":
+          description: News category not found

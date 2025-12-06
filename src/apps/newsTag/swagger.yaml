@@ -1,0 +1,106 @@
+paths:
+  /news-tags:
+    get:
+      summary: Get all news tags
+      tags: [NewsTags]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: List of news tags retrieved successfully
+
+    post:
+      summary: Create news tag
+      tags: [NewsTags]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Technology"
+              required:
+                - name
+      responses:
+        "201":
+          description: News tag created successfully
+
+  /news-tags/{id}:
+    get:
+      summary: Get news tag by ID
+      tags: [NewsTags]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: News tag retrieved successfully
+        "404":
+          description: News tag not found
+
+    put:
+      summary: Update news tag by ID
+      tags: [NewsTags]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated Tag"
+      responses:
+        "200":
+          description: News tag updated successfully
+        "404":
+          description: News tag not found
+
+    delete:
+      summary: Delete news tag by ID
+      tags: [NewsTags]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: News tag deleted successfully
+        "404":
+          description: News tag not found
