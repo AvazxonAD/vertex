@@ -32,7 +32,7 @@ exports.StorageService = class {
       throw new ErrorResponse("storage.not_found", 404);
     }
 
-    const file_path = path.join(__dirname, `../../../public/uploads/images/${result.file}`);
+    const file_path = path.join(__dirname, `../../../public/uploads/${result.file}`);
 
     try {
       await fs.access(file_path, fs.constants.R_OK);
