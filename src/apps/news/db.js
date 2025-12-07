@@ -9,7 +9,7 @@ class NewsDB {
     return result[0];
   }
 
-  static async get(page = 1, limit = 10, id) {
+  static async get(page = 1, limit = 10) {
     const offset = (page - 1) * limit;
 
     const [result, countResult] = await Promise.all([
@@ -34,7 +34,6 @@ class NewsDB {
         FROM news p
         LEFT JOIN new_categories c ON p.category_id = c.id
         WHERE p.is_active = true
-          ${id ? `AND p.id != ${id}` : ""}
         ORDER BY p.created_at DESC
         LIMIT $1 OFFSET $2
       `,

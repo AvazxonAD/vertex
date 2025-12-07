@@ -1,0 +1,120 @@
+paths:
+  /forauthors:
+    get:
+      summary: Get all forauthors
+      tags: [ForAuthors]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: List of forauthors retrieved successfully
+
+    post:
+      summary: Create forauthors
+      tags: [ForAuthors]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Breaking ForAuthors Title"
+                description:
+                  type: string
+                  example: "Short forauthors description"
+                content:
+                  type: string
+                  example: "<p>Full HTML content...</p>"
+                icon:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - description
+                - content
+      responses:
+        "201":
+          description: ForAuthors created successfully
+
+  /forauthors/{id}:
+    get:
+      summary: Get forauthors by ID
+      tags: [ForAuthors]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: ForAuthors retrieved successfully
+        "404":
+          description: ForAuthors not found
+
+    put:
+      summary: Update forauthors by ID
+      tags: [ForAuthors]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                content:
+                  type: string
+                icon:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: ForAuthors updated successfully
+        "404":
+          description: ForAuthors not found
+
+    delete:
+      summary: Delete forauthors by ID
+      tags: [ForAuthors]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: ForAuthors deleted successfully
+        "404":
+          description: ForAuthors not found
