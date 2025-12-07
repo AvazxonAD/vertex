@@ -8,9 +8,9 @@ exports.StorageController = class {
   }
 
   static async get(req, res) {
-    const result = await StorageService.get();
+    const { data, meta } = await StorageService.get(req.query);
 
-    return res.success(result, req.t("storage.get_success"));
+    return res.success(data, req.t("storage.get_success"), 200, meta);
   }
 
   static async getById(req, res) {

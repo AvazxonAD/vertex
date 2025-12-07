@@ -3,26 +3,29 @@ const { ErrorResponse } = require("../../helper/errorResponse");
 const fs = require("fs/promises");
 const path = require("path");
 const mime = require("mime-types");
+const { HelperFunctions } = require("../../helper/functions");
 
 exports.StorageService = class {
   static now = new Date();
 
   static async create(data) {
-    const result = await StorageDB.create([data.file.filename, this.now, this.now]);
-
+    const result = await StorageDB.create([data.file.filename, data.file.mimetype, this.now, this.now]);
     return result;
   }
 
   static async update(data) {
-    const result = await StorageDB.update([data.file.filename, this.now, data.params.id]);
-
+    const result = await StorageDB.update([data.file.filename, data.file.mimetype, this.now, data.params.id]);
     return result;
   }
 
-  static async get(data) {
-    const result = await StorageDB.get([]);
+  static async get({ page = 1, limit = 20, content_type }) {
+    const offset = (page - 1) * limit;
 
-    return result;
+    const result = await StorageDB.get([offset, limit], { content_type });
+
+    const meta = HelperFunctions.pagination({ count: result.count, page, limit });
+
+    return { data: result.data, meta };
   }
 
   static async getById(data) {

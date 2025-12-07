@@ -2,7 +2,7 @@ const { db } = require("../../config/db/index");
 
 exports.StorageDB = class {
   static async create(params) {
-    const query = `INSERT INTO storage(file, created_at, updated_at) VALUES($1, $2, $3) RETURNING *`;
+    const query = `INSERT INTO storage(file, content_type, created_at, updated_at) VALUES($1, $2, $3, $4) RETURNING *`;
 
     const result = await db.query(query, params);
 
@@ -17,16 +17,44 @@ exports.StorageDB = class {
     return result[0];
   }
 
-  static async get(params) {
-    const query = `SELECT * FROM storage WHERE isdeleted = false`;
+  static async get(params, filter) {
+    const conditions = [];
+
+    if (filter.content_type) {
+      params.push(filter.content_type);
+      conditions.push(`content_type = $${params.length}`);
+    }
+
+    const where = conditions.length ? `AND ${conditions.join(" AND ")}` : "";
+
+    const query = `
+      WITH data AS (
+        SELECT
+          *
+        FROM storage
+        WHERE isdeleted = false
+          ${where}
+        OFFSET $1 LIMIT $2
+      )
+      SELECT
+        COALESCE(JSON_AGG(ROW_TO_JSON(data)), '[]'::JSON) AS data,
+        (
+          SELECT
+            COALESCE(COUNT(id), 0)::INTEGER
+          FROM storage
+          WHERE isdeleted = false
+            ${where}
+        ) AS count
+      FROM data
+    `;
 
     const result = await db.query(query, params);
 
-    return result;
+    return result[0];
   }
 
   static async update(params) {
-    const query = `UPDATE storage SET file = $1, updated_at = $2  WHERE id = $3 RETURNING *`;
+    const query = `UPDATE storage SET file = $1, content_type = $2, updated_at = $3  WHERE id = $4 RETURNING *`;
 
     const result = await db.query(query, params);
 

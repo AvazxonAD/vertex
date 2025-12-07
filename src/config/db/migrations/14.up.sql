@@ -1,0 +1,1 @@
+alter table storage add column content_type text; 
