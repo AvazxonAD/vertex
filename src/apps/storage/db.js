@@ -2,7 +2,7 @@ const { db } = require("../../config/db/index");
 
 exports.StorageDB = class {
   static async create(params) {
-    const query = `INSERT INTO storage(file, content_type, created_at, updated_at) VALUES($1, $2, $3, $4) RETURNING *`;
+    const query = `INSERT INTO storage(file, content_type, type, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *`;
 
     const result = await db.query(query, params);
 
@@ -23,6 +23,11 @@ exports.StorageDB = class {
     if (filter.content_type) {
       params.push(filter.content_type);
       conditions.push(`content_type = $${params.length}`);
+    }
+
+    if (filter.type) {
+      params.push(filter.type);
+      conditions.push(`type = $${params.length}`);
     }
 
     const where = conditions.length ? `AND ${conditions.join(" AND ")}` : "";

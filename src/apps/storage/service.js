@@ -9,7 +9,7 @@ exports.StorageService = class {
   static now = new Date();
 
   static async create(data) {
-    const result = await StorageDB.create([data.file.filename, data.file.mimetype, this.now, this.now]);
+    const result = await StorageDB.create([data.file.filename, data.file.mimetype, data.body.type, this.now, this.now]);
     return result;
   }
 
@@ -18,10 +18,10 @@ exports.StorageService = class {
     return result;
   }
 
-  static async get({ page = 1, limit = 20, content_type }) {
+  static async get({ page = 1, limit = 20, content_type, type }) {
     const offset = (page - 1) * limit;
 
-    const result = await StorageDB.get([offset, limit], { content_type });
+    const result = await StorageDB.get([offset, limit], { content_type, type });
 
     const meta = HelperFunctions.pagination({ count: result.count, page, limit });
 

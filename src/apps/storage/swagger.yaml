@@ -15,6 +15,10 @@ paths:
                 image:
                   type: string
                   format: binary
+                type:
+                  type: string
+                  example: admin
+              required: type
       responses:
         "201":
           description: Image uploaded successfully
@@ -37,6 +41,10 @@ paths:
             maximum: 100
             default: 10
         - name: content_type
+          in: query
+          schema:
+            type: string
+        - name: "type"
           in: query
           schema:
             type: string
