@@ -5,7 +5,7 @@ const imageStorage = (folder) => {
   return multer.diskStorage({
     destination: `./public/${folder}`,
     filename: function (req, file, cb) {
-      cb(null, file.originalname.split(".")[0] + "-" + Date.now() + path.extname(file.originalname));
+      cb(null, file.originalname.split(".")[0].replace(/\s+/g, "-") + "-" + Date.now() + path.extname(file.originalname));
     },
   });
 };
@@ -13,7 +13,7 @@ const imageStorage = (folder) => {
 const multiUploadStorage = multer.diskStorage({
   destination: "./public/uploads",
   filename: function (req, file, cb) {
-    cb(null, file.originalname.split(".")[0] + "-" + Date.now() + path.extname(file.originalname));
+    cb(null, file.originalname.split(".")[0].replace(/\s+/g, "-") + "-" + Date.now() + path.extname(file.originalname));
   },
 });
 
