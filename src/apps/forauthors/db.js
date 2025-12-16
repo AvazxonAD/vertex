@@ -19,7 +19,7 @@ class ForAuthorsDB {
           f.*
         FROM forauthors f
         WHERE f.is_active = true
-        ORDER BY f.created_at DESC
+        ORDER BY f.created_at ASC
         LIMIT $1 OFFSET $2
       `,
         [limit, offset]
