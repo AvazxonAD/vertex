@@ -23,9 +23,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(responseHandler);
 
 app.use(i18next, (req, res, next) => {
-  console.log(req.url)
   req.i18n.changeLanguage(req.headers["x-app-lang"]);
 
+  next();
+});
+
+app.use((req, res, next) => {
+  if (req.url.startsWith("/vertex-back")) {
+    req.url = req.url.replace("/vertex-back", "");
+  }
   next();
 });
 
