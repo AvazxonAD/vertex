@@ -12,6 +12,7 @@ const NewsRoutes = require("./news/index");
 const NewsTags = require("./newsTag/index");
 const StorageRoutes = require("./storage/index");
 const ForAuthors = require("./forauthors/index");
+const VolumeRoutes = require("./volume/index");
 
 // Auth routes
 router.use("/auth", AuthRoutes);
@@ -23,5 +24,6 @@ router.use("/news-categories", NewsCategoryRoutes);
 router.use("/news-tags", NewsTags);
 router.use("/storage", StorageRoutes);
 router.use("/forauthors", ForAuthors);
+router.use("/volumes", VolumeRoutes);
 
 module.exports = router;
