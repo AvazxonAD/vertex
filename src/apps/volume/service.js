@@ -6,6 +6,10 @@ class VolumeService {
         return await VolumeDB.getLastVolume();
     }
 
+    static async getByYear(data) {
+        return await VolumeDB.getByYear([data.year]);
+    }
+
     static async get(page = 1, limit = 10) {
         return await VolumeDB.get(page, limit);
     }
@@ -21,6 +25,11 @@ class VolumeService {
     static async create(data) {
         const last_order = await this.getLastVolume();
 
+        const check = await this.getByYear(data);
+        if (check) {
+            throw new ErrorResponse("volume.year_exists", 400);
+        }
+
         return await VolumeDB.create([last_order.order + 1, data.year]);
     }
 
@@ -30,10 +39,14 @@ class VolumeService {
             throw new ErrorResponse("volume.not_found", 404);
         }
 
-        const order = data.order !== undefined ? data.order : old_data.order;
-        const year = data.year !== undefined ? data.year : old_data.year;
+        if (old_data.year !== data.year) {
+            const check = await this.getByYear(data);
+            if (check) {
+                throw new ErrorResponse("volume.year_exists", 400);
+            }
+        }
 
-        return await VolumeDB.update([id, order, year]);
+        return await VolumeDB.update([id, data.year]);
     }
 
     static async delete(id) {

@@ -13,7 +13,8 @@ class Schema {
     static createSchema() {
         return Joi.object({
             body: Joi.object({
-                year: Joi.number().integer().min(1900).max(2100).required(),
+                volume_id: Joi.number().integer().positive().required(),
+                quater: Joi.number().integer().required().valid(1, 2, 3, 4),
             }),
         }).options({ stripUnknown: true });
     }
@@ -24,7 +25,8 @@ class Schema {
                 id: Joi.number().integer().positive().required(),
             }),
             body: Joi.object({
-                year: Joi.number().integer().min(1900).max(2100).required(),
+                volume_id: Joi.number().integer().positive().optional(),
+                quater: Joi.number().integer().required().valid(1, 2, 3, 4),
             }),
         }).options({ stripUnknown: true });
     }

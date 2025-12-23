@@ -1,0 +1,129 @@
+paths:
+  /authors:
+    post:
+      summary: Create new author
+      tags: [Authors]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                bio:
+                  type: string
+                academic_link:
+                  type: string
+                google_scholar_link:
+                  type: string
+              required:
+                - name
+      responses:
+        "201":
+          description: Author created successfully
+        "400":
+          description: Bad request
+
+    get:
+      summary: Get all authors
+      tags: [Authors]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: search
+          in: query
+          schema:
+            type: string
+            default: ""
+      responses:
+        "200":
+          description: List of authors retrieved successfully
+        "500":
+          description: Internal server error
+
+  /authors/{id}:
+    get:
+      summary: Get author by ID
+      tags: [Authors]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Author retrieved successfully
+        "404":
+          description: Author not found
+
+    put:
+      summary: Update author by ID
+      tags: [Authors]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                bio:
+                  type: string
+                academic_link:
+                  type: string
+                google_scholar_link:
+                  type: string
+      responses:
+        "200":
+          description: Author updated successfully
+        "404":
+          description: Author not found
+        "400":
+          description: Bad request
+
+    delete:
+      summary: Delete author by ID
+      tags: [Authors]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Author deleted successfully
+        "404":
+          description: Author not found

@@ -13,7 +13,10 @@ class Schema {
     static createSchema() {
         return Joi.object({
             body: Joi.object({
-                year: Joi.number().integer().min(1900).max(2100).required(),
+                name: Joi.string().max(255).required(),
+                bio: Joi.string().optional().allow(null, ""),
+                academic_link: Joi.string().uri().optional().allow(null, ""),
+                google_scholar_link: Joi.string().uri().optional().allow(null, ""),
             }),
         }).options({ stripUnknown: true });
     }
@@ -24,7 +27,10 @@ class Schema {
                 id: Joi.number().integer().positive().required(),
             }),
             body: Joi.object({
-                year: Joi.number().integer().min(1900).max(2100).required(),
+                name: Joi.string().max(255).optional(),
+                bio: Joi.string().optional().allow(null, ""),
+                academic_link: Joi.string().uri().optional().allow(null, ""),
+                google_scholar_link: Joi.string().uri().optional().allow(null, ""),
             }),
         }).options({ stripUnknown: true });
     }

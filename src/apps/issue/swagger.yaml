@@ -1,0 +1,107 @@
+paths:
+  /issues:
+    post:
+      summary: Create new issue
+      tags: [Issue]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                volume_id:
+                  type: integer
+                quater:
+                  type: integer
+              required: [volume_id, quater]
+      responses:
+        "201":
+          description: Issue created successfully
+
+    get:
+      summary: Get all issues
+      tags: [Issue]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: number
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: List of issues retrieved successfully
+
+  /issues/{id}:
+    get:
+      summary: Get issue by ID
+      tags: [Issue]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Issue retrieved successfully
+        "404":
+          description: Issue not found
+
+    put:
+      summary: Update issue by ID
+      tags: [Issue]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                volume_id:
+                  type: integer
+                quater:
+                  type: integer
+      responses:
+        "200":
+          description: Issue updated successfully
+        "404":
+          description: Issue not found
+
+    delete:
+      summary: Delete issue by ID
+      tags: [Issue]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Issue deleted successfully
+        "404":
+          description: Issue not found

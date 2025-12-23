@@ -14,6 +14,20 @@ class VolumeDB {
     return result[0] || { order: 0 };
   }
 
+  static async getByYear(params) {
+    const query = `
+      SELECT
+        *
+      FROM volume
+      WHERE deleted_at IS NULL
+        AND year = $1
+      ORDER BY id DESC 
+      LIMIT 1
+    `;
+    const result = await db.query(query, params);
+    return result[0]
+  }
+
   static async get(page = 1, limit = 10) {
     const offset = (page - 1) * limit;
 
@@ -79,12 +93,10 @@ class VolumeDB {
   }
 
   static async update(params) {
-    // params expected: [id, order, year]
     const query = `
       UPDATE volume 
       SET
-        "order" = $2,
-        year = $3,
+        year = $2,
         updated_at = now()
       WHERE id = $1 
         AND deleted_at IS NULL
