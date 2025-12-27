@@ -1,0 +1,177 @@
+paths:
+  /features:
+    get:
+      summary: Get all features
+      tags: [Features]
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of features retrieved successfully
+
+    post:
+      summary: Create feature
+      tags: [Features]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                jurnal_id:
+                  type: integer
+                issue_id:
+                  type: integer
+                article_id:
+                  type: integer
+                title:
+                  type: string
+                description:
+                  type: string
+                body:
+                  type: string
+                dru_link:
+                  type: string
+                file:
+                  type: string
+                  format: binary
+                received:
+                  type: string
+                  format: date
+                revision_received:
+                  type: string
+                  format: date
+                accepted:
+                  type: string
+                  format: date
+                published:
+                  type: string
+                  format: date
+                authors:
+                  type: array
+                  items:
+                    type: integer
+              required:
+                - jurnal_id
+                - issue_id
+                - article_id
+                - title
+                - authors
+      responses:
+        "201":
+          description: Feature created successfully
+
+  /features/{id}:
+    get:
+      summary: Get feature by ID
+      tags: [Features]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Feature details retrieved successfully
+        "404":
+          description: Feature not found
+
+    put:
+      summary: Update feature by ID
+      tags: [Features]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                jurnal_id:
+                  type: integer
+                issue_id:
+                  type: integer
+                article_id:
+                  type: integer
+                title:
+                  type: string
+                description:
+                  type: string
+                body:
+                  type: string
+                dru_link:
+                  type: string
+                file:
+                  type: string
+                  format: binary
+                received:
+                  type: string
+                  format: date
+                revision_received:
+                  type: string
+                  format: date
+                accepted:
+                  type: string
+                  format: date
+                published:
+                  type: string
+                  format: date
+                authors:
+                  type: array
+                  items:
+                    type: integer
+              required:
+                - jurnal_id
+                - issue_id
+                - article_id
+                - title
+                - authors
+      responses:
+        "200":
+          description: Feature updated successfully
+        "404":
+          description: Feature not found
+
+    delete:
+      summary: Delete feature by ID
+      tags: [Features]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Feature deleted successfully
+        "404":
+          description: Feature not found
