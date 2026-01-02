@@ -11,7 +11,7 @@ function loadModuleSwagger() {
       title: "Mobile API",
       version: "1.0.0",
     },
-    servers: [{ url: "http://localhost:4001/api" }, { url: "http://217.18.63.71:4001/api" }, { url: "https://raqamli-manaviyat.uz/vertex-back/api" }, { url: "https://nafaqa.fizmasoft.uz/api" }],
+    servers: [{ url: "http://localhost:4001/api" }, { url: "http://178.209.127.90:4001/api" }],
     paths: {},
     components: {
       securitySchemes: {
