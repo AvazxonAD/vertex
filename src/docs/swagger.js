@@ -8,7 +8,7 @@ function loadModuleSwagger() {
   const combined = {
     openapi: "3.0.0",
     info: {
-      title: "Mobile API",
+      title: "VERTEX API",
       version: "1.0.0",
     },
     servers: [{ url: "http://localhost:4001/api" }, { url: "http://178.209.127.90:4001/api" }],
