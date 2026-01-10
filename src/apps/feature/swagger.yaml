@@ -21,6 +21,21 @@ paths:
           required: false
           schema:
             type: string
+        - name: jurnal_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: article_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: issue_id
+          in: query
+          required: false
+          schema:
+            type: integer
       responses:
         "200":
           description: List of features retrieved successfully
