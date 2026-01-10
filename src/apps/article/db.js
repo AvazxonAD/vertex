@@ -20,11 +20,17 @@ exports.ArticlesDB = class {
   static async getById(params) {
     const query = `--sql
       SELECT
-        *,
-        '${process.env.BASE_URL}/articles/file/' || image AS image_url
-      FROM articles
-      WHERE id = $1
-        AND deleted_at IS NULL
+        a.*,
+        f.name AS field_name,
+        f.id AS field_id,
+        j.name AS jurnal_name,
+        j.id AS jurnal_id,
+        '${process.env.BASE_URL}/articles/file/' || a.image AS image_url
+      FROM articles  a
+      JOIN fields f ON f.id = a.field_id
+      JOIN jurnals j ON j.id = f.jurnal_id
+      WHERE a.id = $1
+        AND a.deleted_at IS NULL
     `;
 
     const result = await db.query(query, params);
@@ -55,17 +61,13 @@ exports.ArticlesDB = class {
       conditions.push(`f.id = $${params.length}`);
     }
 
-    // if (filter.jurnal_id) {
-    //   params.push(filter.jurnal_id);
-    //   conditions.push(`j.id = $${params.length}`);
-    // }
-
     const where = conditions.length ? `AND ${conditions.join(" AND ")}` : "";
 
     const query = `--sql
       SELECT
         a.*,
         f.name AS field_name,
+        f.id AS field_id,
         j.name AS jurnal_name,
         j.id AS jurnal_id,
         '${process.env.BASE_URL}/articles/file/' || a.image AS image_url
