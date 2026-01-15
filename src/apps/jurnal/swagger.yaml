@@ -3,6 +3,11 @@ paths:
     get:
       summary: Get all jurnals
       tags: [Jurnals]
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
       responses:
         "200":
           description: List of jurnals retrieved successfully

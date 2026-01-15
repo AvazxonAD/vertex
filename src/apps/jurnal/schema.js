@@ -33,7 +33,9 @@ exports.Schema = class {
 
   static get() {
     return Joi.object({
-      query: Joi.object({}),
+      query: Joi.object({
+        search: Joi.string().trim().max(1000).optional().allow(""),
+      }),
     });
   }
 

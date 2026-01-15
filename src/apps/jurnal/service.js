@@ -29,7 +29,7 @@ exports.JurnalsService = class {
   }
 
   static async get(data) {
-    const result = await JurnalsDB.get([]);
+    const result = await JurnalsDB.get([], data);
 
     return result;
   }

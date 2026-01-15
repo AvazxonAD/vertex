@@ -25,12 +25,22 @@ exports.JurnalsDB = class {
     return result[0];
   }
 
-  static async get(params) {
+  static async get(params, filter) {
+    const conditions = [];
+
+    if (filter.search) {
+      conditions.push(`name ILIKE '%' || $${params.length + 1} || '%'`);
+      params.push(filter.search);
+    }
+
+    const where = conditions.length ? `AND ${conditions.join(" AND ")}` : "";
+
     const query = `--sql
       SELECT
         *
       FROM jurnals
       WHERE deleted_at IS NULL
+      ${where}
       ORDER BY name`;
 
     const result = await db.query(query, params);
