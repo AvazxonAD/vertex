@@ -14,7 +14,8 @@ class IssueDB {
       db.query(
         `
                 SELECT
-                    i.*
+                    i.*,
+                    v.year AS volume_year
                 FROM issue i
                 JOIN volume v ON i.volume_id = v.id
                 WHERE i.deleted_at IS NULL
