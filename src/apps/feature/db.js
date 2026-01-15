@@ -1,6 +1,28 @@
 const { db } = require("../../config/db/index");
 
 exports.FeaturesDB = class {
+  static async updateSeeCount(params) {
+    const query = `
+      UPDATE features SET 
+        see_count = see_count + 1 
+      WHERE id = $1 
+      RETURNING *`;
+
+    const result = await db.query(query, params);
+    return result[0];
+  }
+
+  static async updateDownloadCount(params) {
+    const query = `
+      UPDATE features SET 
+        download_count = download_count + 1 
+      WHERE pdf_file = $1
+      RETURNING *`;
+
+    const result = await db.query(query, params);
+    return result[0];
+  }
+
   static async create(params) {
     const query = `
       INSERT INTO features(

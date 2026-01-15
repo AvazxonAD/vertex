@@ -27,6 +27,8 @@ exports.Controller = class {
 
     res.setHeader("Content-type", content_type);
 
+    await FeaturesService.updateDownloadCount(req.params.file_name);
+
     return res.send(file);
   }
 

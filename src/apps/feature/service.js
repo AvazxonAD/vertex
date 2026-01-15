@@ -6,6 +6,11 @@ const { ArticlesDB } = require("../article/db");
 const { AuthorsDB } = require("../authors/db");
 
 exports.FeaturesService = class {
+  static async updateDownloadCount(file_name) {
+    const result = await FeaturesDB.updateDownloadCount([file_name]);
+    return result;
+  }
+
   static async create(data) {
     const file = data.file ? data.file.filename : null;
 
@@ -101,6 +106,9 @@ exports.FeaturesService = class {
     if (!result) {
       throw new ErrorResponse("feature.not_found", 404);
     }
+
+    await FeaturesDB.updateSeeCount([id]);
+
     result.authors = await FeaturesDB.getAuthorsByFeatureId(id);
     return result;
   }
