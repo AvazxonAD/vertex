@@ -6,26 +6,16 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 class Db {
-  constructor(options) {
+  constructor(url) {
     this.pool = new Pool({
-      user: options.user,
-      password: options.password,
-      port: options.port,
-      host: options.host,
-      database: options.database,
+      connectionString: url,
+      ssl: { rejectUnauthorized: false },
     });
   }
 
   static getInstance() {
     if (!Db.instance) {
-      const options = {
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-        host: process.env.DB_HOST,
-        database: process.env.DB_DATABASE,
-      };
-      Db.instance = new Db(options);
+      Db.instance = new Db(process.env.DATABASE_URL);
     }
     return Db.instance;
   }
