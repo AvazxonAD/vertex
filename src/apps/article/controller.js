@@ -6,7 +6,8 @@ const { ErrorResponse } = require("../../helper/errorResponse");
 
 exports.Controller = class {
   static async getFile(req, res) {
-    const file_path = path.join(__dirname, `../../../${process.env.UPLOAD_PATH}/`, req.params.file_name);
+    const UPLOAD_BASE = process.env.UPLOAD_PATH;
+    const file_path = path.join(UPLOAD_BASE, req.params.file_name);
 
     try {
       await fs.promises.access(file_path);
