@@ -35,7 +35,7 @@ class Controller {
   static async getFile(req, res) {
     const { filename } = req.params;
 
-    const imagePath = path.join(process.cwd(), "public", "uploads", filename);
+    const imagePath = path.join(process.cwd(), process.env.UPLOAD_PATH, filename);
 
     if (!fs.existsSync(imagePath)) {
       return res.error(req.t("file_not_found"), 404);
