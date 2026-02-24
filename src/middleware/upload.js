@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const UPLOAD_BASE = process.env.UPLOAD_PATH;
 
