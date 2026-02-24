@@ -35,6 +35,15 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/check-files", (req, res) => {
+  const path = require("path");
+  const fs = require("fs");
+  const path_folder = path.join(__dirname, "../data/uploads");
+
+  const files = fs.readdirSync(path_folder);
+  res.json({ files });
+});
+
 const swagger_document = loadModuleSwagger();
 
 app.use("/api", routes);
