@@ -1,9 +1,15 @@
 const multer = require("multer");
 const path = require("path");
 
+const UPLOAD_BASE = process.env.UPLOAD_PATH;
+
 const imageStorage = (folder) => {
   return multer.diskStorage({
-    destination: `./${process.env.UPLOAD_PATH}/${folder}`,
+    destination: function (req, file, cb) {
+      const uploadPath = path.join(UPLOAD_BASE, folder);
+      fs.mkdirSync(uploadPath, { recursive: true });
+      cb(null, uploadPath);
+    },
     filename: function (req, file, cb) {
       cb(null, file.originalname.split(".")[0].replace(/\s+/g, "-") + "-" + Date.now() + path.extname(file.originalname));
     },
@@ -11,7 +17,10 @@ const imageStorage = (folder) => {
 };
 
 const multiUploadStorage = multer.diskStorage({
-  destination: `./${process.env.UPLOAD_PATH}`,
+  destination: function (req, file, cb) {
+    fs.mkdirSync(UPLOAD_BASE, { recursive: true });
+    cb(null, UPLOAD_BASE);
+  },
   filename: function (req, file, cb) {
     cb(null, file.originalname.split(".")[0].replace(/\s+/g, "-") + "-" + Date.now() + path.extname(file.originalname));
   },
