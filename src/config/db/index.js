@@ -1,21 +1,31 @@
 const { Pool } = require("pg");
 const fs = require("fs");
 const path = require("path");
-const dotenv = require("dotenv");
-
-dotenv.config();
-
+require("dotenv").config();
 class Db {
-  constructor(url) {
+  static instance;
+
+  constructor(options) {
     this.pool = new Pool({
-      connectionString: url,
-      ssl: { rejectUnauthorized: false },
+      user: options.user,
+      password: options.password,
+      port: options.port,
+      host: options.host,
+      database: options.database,
+      connectionTimeoutMillis: 10000,
     });
   }
 
   static getInstance() {
     if (!Db.instance) {
-      Db.instance = new Db(process.env.DATABASE_URL);
+      const options = {
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        port: process.env.DB_PORT,
+        host: process.env.DB_HOST,
+        database: process.env.DB_DATABASE,
+      };
+      Db.instance = new Db(options);
     }
     return Db.instance;
   }
@@ -61,8 +71,7 @@ class Db {
   static async connectDB() {
     const db = Db.getInstance();
     const dbPool = db.getPool();
-    console.log("Connect db".blue);
-    await db.query(`--sql
+    await db.query(`
             CREATE TABLE IF NOT EXISTS "migrations"
             (
                 "id"        SERIAL PRIMARY KEY NOT NULL,
@@ -81,6 +90,10 @@ class Db {
 
     const versions = await db.query(`SELECT * FROM migrations ORDER BY id`);
 
+    if (all_files.length === 0) {
+      throw new Error("No .sql files found in the directory");
+    }
+
     const sortedFiles = all_files.sort((a, b) => {
       const numA = parseInt(a.split(".")[0], 10);
       const numB = parseInt(b.split(".")[0], 10);
@@ -95,14 +108,14 @@ class Db {
 
         try {
           await client.query("BEGIN");
-          console.info(`runing start migration : => ${file}`.bgYellow);
           await client.query(`INSERT INTO migrations(file_name) VALUES($1)`, [file]);
+
           filePath = `${folder_path}/${file}`;
 
           const sqlQuery = await fs.promises.readFile(filePath, "utf-8");
 
           await client.query(sqlQuery);
-          console.info(`runing success migration : => ${file}`.bgRed);
+          console.info(`runing migration : => ${file}`.bgRed);
 
           await client.query("COMMIT");
         } catch (error) {
@@ -114,15 +127,13 @@ class Db {
       }
     }
 
+    console.info("Connect DB".blue);
     return { db, dbPool };
   }
 }
 
-const db = Db.getInstance();
-const pool = Db.getInstance().getPool();
-
 module.exports = {
   Db,
-  db,
-  pool,
+  db: Db.getInstance(),
+  pool: Db.getInstance().getPool(),
 };
