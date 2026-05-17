@@ -36,7 +36,7 @@ class Controller {
     const { filename } = req.params;
 
     const UPLOAD_BASE = process.env.UPLOAD_PATH;
-    const imagePath = path.join(UPLOAD_BASE, filename);
+    const imagePath = path.resolve(UPLOAD_BASE, filename);
 
     if (!fs.existsSync(imagePath)) {
       return res.error(req.t("file_not_found"), 404);

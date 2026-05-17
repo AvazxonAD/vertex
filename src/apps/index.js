@@ -16,6 +16,8 @@ const VolumeRoutes = require("./volume/index");
 const IssueRoutes = require("./issue/index");
 const AuthorsRoutes = require("./authors/index");
 const FeatureRoutes = require("./feature/index");
+const MessageRoutes = require("./message/index");
+const JurnalPostRoutes = require("./jurnalPost/index");
 
 
 // Auth routes
@@ -32,6 +34,8 @@ router.use("/volumes", VolumeRoutes);
 router.use("/issues", IssueRoutes);
 router.use("/authors", AuthorsRoutes);
 router.use("/features", FeatureRoutes);
+router.use("/messages", MessageRoutes);
+router.use("/jurnal-posts", JurnalPostRoutes);
 
 
 module.exports = router;

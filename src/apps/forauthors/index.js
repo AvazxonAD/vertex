@@ -7,8 +7,8 @@ const { multiUpload } = require("../../middleware/upload");
 const router = express.Router();
 
 router.get("/", validator(Controller.get, Schema.getAllSchema()));
-router.get("/:id", validator(Controller.getById, Schema.getByIdSchema()));
 router.get("/icons/:filename", validator(Controller.getFile, Schema.getFileSchema()));
+router.get("/:id(\\d+)", validator(Controller.getById, Schema.getByIdSchema()));
 router.post("/", multiUpload.fields([{ name: "icon", maxCount: 1 }]), validator(Controller.create, Schema.createSchema()));
 router.put("/:id", multiUpload.fields([{ name: "icon", maxCount: 1 }]), validator(Controller.update, Schema.updateSchema()));
 router.delete("/:id", validator(Controller.delete, Schema.deleteSchema()));
