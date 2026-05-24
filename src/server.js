@@ -35,13 +35,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/check-files", (req, res) => {
-  const fs = require("fs");
-  const path_folder = process.env.UPLOAD_PATH;
-  const files = fs.readdirSync(path_folder);
-  res.json({ files });
-});
-
 const swagger_document = loadModuleSwagger();
 
 app.use("/api", routes);

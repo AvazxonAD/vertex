@@ -1,1 +1,119 @@
-{}
+{
+  "validationError": "Tekshiruv xatosi",
+  "file_not_found": "Fayl topilmadi",
+  "Internal Server Error": "Server ichki xatosi",
+  "system": {
+    "create_success": "Muvaffaqiyatli yaratildi",
+    "update_success": "Muvaffaqiyatli yangilandi",
+    "get_success": "Muvaffaqiyatli olindi",
+    "delete_success": "Muvaffaqiyatli o'chirildi"
+  },
+  "auth": {
+    "login_success": "Tizimga muvaffaqiyatli kirildi",
+    "register_success": "Ro'yxatdan o'tish muvaffaqiyatli yakunlandi",
+    "user_not_found": "Foydalanuvchi topilmadi",
+    "wrong_password": "Parol noto'g'ri",
+    "email_exists": "Bu email allaqachon ro'yxatdan o'tgan",
+    "username_exists": "Bu foydalanuvchi nomi band",
+    "unauthorized": "Ruxsat berilmagan",
+    "token_invalid": "Token noto'g'ri",
+    "token_expired": "Token muddati tugagan"
+  },
+  "forauthors": {
+    "get_all_success": "Mualliflar uchun resurslar muvaffaqiyatli olindi",
+    "get_success": "Resurs muvaffaqiyatli olindi",
+    "create_success": "Resurs muvaffaqiyatli yaratildi",
+    "update_success": "Resurs muvaffaqiyatli yangilandi",
+    "delete_success": "Resurs muvaffaqiyatli o'chirildi",
+    "not_found": "Resurs topilmadi"
+  },
+  "author": {
+    "get_all_success": "Mualliflar muvaffaqiyatli olindi",
+    "get_success": "Muallif muvaffaqiyatli olindi",
+    "create_success": "Muallif muvaffaqiyatli yaratildi",
+    "update_success": "Muallif muvaffaqiyatli yangilandi",
+    "delete_success": "Muallif muvaffaqiyatli o'chirildi",
+    "not_found": "Muallif topilmadi"
+  },
+  "article": {
+    "file_not_found": "Maqola fayli topilmadi",
+    "title_already_exists": "Bu sarlavhali maqola allaqachon mavjud",
+    "not_found": "Maqola topilmadi"
+  },
+  "articles": {
+    "not_found": "Maqolalar topilmadi"
+  },
+  "jurnal_post": {
+    "not_found": "Jurnal posti topilmadi",
+    "file_not_found": "Jurnal posti fayli topilmadi"
+  },
+  "jurnals": {
+    "not_found": "Jurnal topilmadi"
+  },
+  "fields": {
+    "not_found": "Yo'nalish topilmadi"
+  },
+  "issue": {
+    "get_all_success": "Sonlar muvaffaqiyatli olindi",
+    "get_success": "Son muvaffaqiyatli olindi",
+    "create_success": "Son muvaffaqiyatli yaratildi",
+    "update_success": "Son muvaffaqiyatli yangilandi",
+    "delete_success": "Son muvaffaqiyatli o'chirildi",
+    "not_found": "Son topilmadi"
+  },
+  "volume": {
+    "get_all_success": "Volumelar muvaffaqiyatli olindi",
+    "get_success": "Volume muvaffaqiyatli olindi",
+    "create_success": "Volume muvaffaqiyatli yaratildi",
+    "update_success": "Volume muvaffaqiyatli yangilandi",
+    "delete_success": "Volume muvaffaqiyatli o'chirildi",
+    "not_found": "Volume topilmadi"
+  },
+  "news": {
+    "get_all_success": "Yangiliklar muvaffaqiyatli olindi",
+    "get_success": "Yangilik muvaffaqiyatli olindi",
+    "create_success": "Yangilik muvaffaqiyatli yaratildi",
+    "update_success": "Yangilik muvaffaqiyatli yangilandi",
+    "delete_success": "Yangilik muvaffaqiyatli o'chirildi",
+    "not_found": "Yangilik topilmadi"
+  },
+  "category": {
+    "get_all_success": "Kategoriyalar muvaffaqiyatli olindi",
+    "get_success": "Kategoriya muvaffaqiyatli olindi",
+    "create_success": "Kategoriya muvaffaqiyatli yaratildi",
+    "update_success": "Kategoriya muvaffaqiyatli yangilandi",
+    "delete_success": "Kategoriya muvaffaqiyatli o'chirildi",
+    "not_found": "Kategoriya topilmadi"
+  },
+  "tag": {
+    "get_all_success": "Teglar muvaffaqiyatli olindi",
+    "get_success": "Teg muvaffaqiyatli olindi",
+    "create_success": "Teg muvaffaqiyatli yaratildi",
+    "update_success": "Teg muvaffaqiyatli yangilandi",
+    "delete_success": "Teg muvaffaqiyatli o'chirildi",
+    "not_found": "Teg topilmadi"
+  },
+  "message": {
+    "get_all_success": "Xabarlar muvaffaqiyatli olindi",
+    "stats_success": "Xabarlar statistikasi muvaffaqiyatli olindi",
+    "get_success": "Xabar muvaffaqiyatli olindi",
+    "create_success": "Xabar muvaffaqiyatli yuborildi",
+    "read_success": "Xabar o'qilgan deb belgilandi",
+    "reply_success": "Javob muvaffaqiyatli yuborildi",
+    "delete_success": "Xabar muvaffaqiyatli o'chirildi",
+    "not_found": "Xabar topilmadi"
+  },
+  "storage": {
+    "create_success": "Fayl muvaffaqiyatli yuklandi",
+    "get_success": "Fayllar muvaffaqiyatli olindi",
+    "delete_success": "Fayl muvaffaqiyatli o'chirildi",
+    "not_found": "Fayl topilmadi"
+  },
+  "feature": {
+    "create_success": "Feature muvaffaqiyatli yaratildi",
+    "update_success": "Feature muvaffaqiyatli yangilandi",
+    "get_success": "Feature muvaffaqiyatli olindi",
+    "delete_success": "Feature muvaffaqiyatli o'chirildi",
+    "not_found": "Feature topilmadi"
+  }
+}

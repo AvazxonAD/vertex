@@ -1,0 +1,119 @@
+{
+  "validationError": "Validation error",
+  "file_not_found": "File not found",
+  "Internal Server Error": "Internal Server Error",
+  "system": {
+    "create_success": "Created successfully",
+    "update_success": "Updated successfully",
+    "get_success": "Fetched successfully",
+    "delete_success": "Deleted successfully"
+  },
+  "auth": {
+    "login_success": "Login successful",
+    "register_success": "Registration successful",
+    "user_not_found": "User not found",
+    "wrong_password": "Wrong password",
+    "email_exists": "Email already exists",
+    "username_exists": "Username already exists",
+    "unauthorized": "Unauthorized",
+    "token_invalid": "Invalid token",
+    "token_expired": "Token expired"
+  },
+  "forauthors": {
+    "get_all_success": "Author resources fetched successfully",
+    "get_success": "Author resource fetched successfully",
+    "create_success": "Author resource created successfully",
+    "update_success": "Author resource updated successfully",
+    "delete_success": "Author resource deleted successfully",
+    "not_found": "Author resource not found"
+  },
+  "author": {
+    "get_all_success": "Authors fetched successfully",
+    "get_success": "Author fetched successfully",
+    "create_success": "Author created successfully",
+    "update_success": "Author updated successfully",
+    "delete_success": "Author deleted successfully",
+    "not_found": "Author not found"
+  },
+  "article": {
+    "file_not_found": "Article file not found",
+    "title_already_exists": "Article with this title already exists",
+    "not_found": "Article not found"
+  },
+  "articles": {
+    "not_found": "Articles not found"
+  },
+  "jurnal_post": {
+    "not_found": "Journal post not found",
+    "file_not_found": "Journal post file not found"
+  },
+  "jurnals": {
+    "not_found": "Journal not found"
+  },
+  "fields": {
+    "not_found": "Field not found"
+  },
+  "issue": {
+    "get_all_success": "Issues fetched successfully",
+    "get_success": "Issue fetched successfully",
+    "create_success": "Issue created successfully",
+    "update_success": "Issue updated successfully",
+    "delete_success": "Issue deleted successfully",
+    "not_found": "Issue not found"
+  },
+  "volume": {
+    "get_all_success": "Volumes fetched successfully",
+    "get_success": "Volume fetched successfully",
+    "create_success": "Volume created successfully",
+    "update_success": "Volume updated successfully",
+    "delete_success": "Volume deleted successfully",
+    "not_found": "Volume not found"
+  },
+  "news": {
+    "get_all_success": "News fetched successfully",
+    "get_success": "News item fetched successfully",
+    "create_success": "News created successfully",
+    "update_success": "News updated successfully",
+    "delete_success": "News deleted successfully",
+    "not_found": "News not found"
+  },
+  "category": {
+    "get_all_success": "Categories fetched successfully",
+    "get_success": "Category fetched successfully",
+    "create_success": "Category created successfully",
+    "update_success": "Category updated successfully",
+    "delete_success": "Category deleted successfully",
+    "not_found": "Category not found"
+  },
+  "tag": {
+    "get_all_success": "Tags fetched successfully",
+    "get_success": "Tag fetched successfully",
+    "create_success": "Tag created successfully",
+    "update_success": "Tag updated successfully",
+    "delete_success": "Tag deleted successfully",
+    "not_found": "Tag not found"
+  },
+  "message": {
+    "get_all_success": "Messages fetched successfully",
+    "stats_success": "Message statistics fetched successfully",
+    "get_success": "Message fetched successfully",
+    "create_success": "Message sent successfully",
+    "read_success": "Message marked as read",
+    "reply_success": "Reply sent successfully",
+    "delete_success": "Message deleted successfully",
+    "not_found": "Message not found"
+  },
+  "storage": {
+    "create_success": "File uploaded successfully",
+    "get_success": "Files fetched successfully",
+    "delete_success": "File deleted successfully",
+    "not_found": "File not found"
+  },
+  "feature": {
+    "create_success": "Feature created successfully",
+    "update_success": "Feature updated successfully",
+    "get_success": "Feature fetched successfully",
+    "delete_success": "Feature deleted successfully",
+    "not_found": "Feature not found"
+  }
+}

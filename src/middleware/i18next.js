@@ -11,12 +11,14 @@ i18next
       backend: {
         loadPath: join(__dirname, "../locales/{{lng}}.json"),
       },
-      lng: "uz",
-      fallbackLng: "uz",
-      preload: ["uz", "cyrl", "ru"],
+      lng: "en",
+      fallbackLng: "en",
+      supportedLngs: ["en", "uz"],
+      preload: ["en", "uz"],
       detection: {
         order: ["header", "querystring", "cookie"],
         lookupHeader: "x-app-lang",
+        lookupQuerystring: "lang",
 
         ignoreCase: true,
 
